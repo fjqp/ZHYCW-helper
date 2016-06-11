@@ -1,0 +1,24 @@
+method post
+url	"http://passport.chinahr.com/ajax/pc/login"
+backUrl	"http://www.chinahr.com/shenzhen/"
+from	""
+imgCode	""
+input	"15728567842"
+pwd	"31af4a634cf808c8a7572b741dec6234b751165471560d368e4dd8fb84428c3db240c478a9d1afb455c9e5235d84dd51bdc8ddf1fc621b3b0d4a10664ff13cd3846804a242d0cb7fab7a88f82d9e71ae6bc815d0191691532bfd45c8ee3955250f17b50d16e76c937ab7de4a0aa4ae1040ee50465a45c753e2a8909016a04291"
+rember	"1"
+success: function(data) {
+					successfn(data)
+				}
+
+complete:function(){
+					if(completefn){
+						completefn();
+					}
+				}
+error: function(XMLHttpRequest, textStatus) {
+					if(errorfn){
+						errorfn(XMLHttpRequest, textStatus);
+					}else{
+						popMsg.mid({msg:"抱歉，系统不稳定，请稍后重试",type:"fail",timer:1500})
+					}
+				}
