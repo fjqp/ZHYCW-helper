@@ -1,7 +1,24 @@
+#-*- coding: utf-8 -*-
 import requests
 from PIL import Image, ImageFilter, ImageEnhance
 from StringIO import StringIO
 import pytesser
+
+class ImageUtil:
+    @staticmethod
+    def two_value_m1(i):
+        '''二值化 '''
+        i = i.filter(ImageFilter.MedianFilter())
+        enhancer = ImageEnhance.Contrast(i)
+        i = enhancer.enhance((2))
+        i = i.convert('1')
+        return i
+
+    @staticmethod
+    def convert_to_gray_png( i):
+        '''转换到灰度图'''
+        i = i.convert('L')
+        return i
 
 class ZHYCW:
     LOGIN_URL_GET = 'http://passport.chinahr.com/pc/tologin?backUrl=http://www.chinahr.com/shenzhen/'
@@ -16,13 +33,6 @@ class ZHYCW:
         r = self.s.get('http://passport.chinahr.com/m/genpic')
         i = Image.open(StringIO(r.content))
         i.show()
-
-        i = i.filter(ImageFilter.MedianFilter())
-        enhancer = ImageEnhance.Contrast(i)
-        i = enhancer.enhance((2))
-        i = i.convert('1')
-        i.show()
-
 
         imgCode = pytesser.image_to_string(i)
         print '-->',imgCode
