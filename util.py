@@ -19,3 +19,4 @@ def perform_cleanup(scratch_image_name, scratch_text_name_root):
 			os.remove(name)
 		except OSError:
 			pass
+			
